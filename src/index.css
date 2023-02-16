@@ -1,4 +1,8 @@
-*,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* *,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -47,4 +51,4 @@ select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-}
+} */
