@@ -1,15 +1,12 @@
 import { useSelector } from "react-redux";
+import { selectCash } from "../store/cash/selector";
 
 export const DisplayCash = () => {
-  const moneyOnAccount = useSelector((state) => {
-    console.log(state);
-    const { cashReducer } = state;
-    return cashReducer.cash;
-  });
+  const cash = useSelector(selectCash);
 
   return (
-    <h1 className="font-bold text-3xl mb-8">
-      Текущий счет: {moneyOnAccount} руб
+    <h1 className="text-violet-500 font-bold text-3xl mb-8">
+      Текущий счет: {cash} руб
     </h1>
   );
 };

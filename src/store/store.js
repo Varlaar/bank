@@ -1,4 +1,4 @@
-import { createStore } from "redux";
-import { cashReducer } from "./cashReducer"; 
+import { legacy_createStore as createStore } from "redux";
+import { rootReducer } from "./rootReducer";
 
-export const store = createStore(cashReducer);
+export const store = createStore(rootReducer);
