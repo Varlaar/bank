@@ -1,15 +1,15 @@
-import { ADD_CASH, GET_CASH } from "./actionTypes";
+import types from "./types";
 
 const initialState = {
   cash: 0,
 };
 
-export const cashReducer = (state = initialState, action) => {
+export const cash = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CASH:
+    case types.ADD_CASH:
       return { ...state, cash: state.cash + action.payload };
 
-    case GET_CASH:
+    case types.GET_CASH:
       return { ...state, cash: state.cash - action.payload };
 
     default:
