@@ -1,5 +1,4 @@
 import React from "react";
-import thunk from "redux-thunk";
 import { RootNavigation } from "./navigation/RootNavigation";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
