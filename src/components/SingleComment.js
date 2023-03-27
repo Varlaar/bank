@@ -13,7 +13,7 @@ export const SingleComment = ({ title, id}) => {
   const handleTextCommentUpdate = (e) => {
     e.preventDefault();
     console.log("submit >>>", commentText);
-    dispatch(commentUpdate(commentText, id));
+    dispatch(commentUpdate({commentText, id}));
   };
 
   const handleTextCommentDelete = (e) => {

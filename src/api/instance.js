@@ -1,8 +1,7 @@
 import axios from "axios";
-import { baseUrl } from "../commons/assets/constants";
 
 const instance = axios.create({
-  baseURL: baseUrl,
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
 });
 

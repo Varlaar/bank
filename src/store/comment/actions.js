@@ -1,5 +1,5 @@
 import types from "./types";
-import requestComments from "../../api/commentsApi";
+import { requestComments } from "../../api/commentsApi";
 import { loaderOn } from "../loader/actions";
 import { loaderOff } from "../loader/actions";
 
@@ -24,14 +24,14 @@ export const commentDelete = (id) => ({
   payload: id,
 });
 
-export const fetchComments = () => async (dispatch) => {
+export const fetchComments = (params) => async (dispatch) => {
   dispatch(loaderOn());
   dispatch({
     type: types.FETCH_COMMENTS_REQUEST,
   });
 
   try {
-    const response = await requestComments(10);
+    const response = await requestComments(params);
     setTimeout(() => {
       dispatch({
         type: types.FETCH_COMMENTS_SUCCESS,
