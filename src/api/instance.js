@@ -1,8 +1,8 @@
 import axios from "axios";
-import { API_URL } from "../assets/constanse";
+import { baseUrl } from "../commons/assets/constants";
 
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: baseUrl,
   timeout: 1000,
 });
 

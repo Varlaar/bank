@@ -2,18 +2,19 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCash, getCash } from "../store/cash/actions";
 import { selectCash } from "../store/cash/selector";
+import { normalizeValue } from "../utils";
 
 export const ControlCash = () => {
-  const [inputCash, setInputCash] = useState(""); // Сумма для внесения / снятия денег из поля 'input'
+  const [inputCash, setInputCash] = useState(""); // Сумма для внесения / снятия денег
   const dispatch = useDispatch();
   const moneyOnAccount = useSelector(selectCash); // Текущая сумма на счету пользователя
   const disabledAddCash = inputCash === 0 || inputCash === ""; // Блокировка кнопки пополнения счета, если введенная сумма 0 руб
-  const disabledGetCash = !moneyOnAccount || inputCash === 0 || inputCash === ""; // Блокировка кнопки снятия со счета, если на счету 0 руб
+  const disabledGetCash = !moneyOnAccount || disabledAddCash; // Блокировка кнопки снятия со счета, если на счету 0 руб
 
   // Значение суммы в поле 'input'
-  const handleChangeInputCash = ({ target: { value } }) => {
-    let sum = Number(value.replace(/[^\d]/g, '')); // Исключаем запись в поле input всех символов, кроме чисел
-    setInputCash(sum);
+  const handleInputCashChange = ({ target: { value } }) => {
+    const depositMoney = normalizeValue(value); // Сумма для внесения / снятия денег, введенная пользователем
+    setInputCash(depositMoney);
   };
 
   // Внесение денег на счет
@@ -33,10 +34,10 @@ export const ControlCash = () => {
           `На Вашем счету недостаточно средств! Вы можете снять ${moneyOnAccount} руб`
         );
         setInputCash(moneyOnAccount);
-      } else {
-        dispatch(getCash(inputCash));
-        setInputCash("");
+        return;
       }
+      dispatch(getCash(inputCash));
+      setInputCash("");
     },
     [dispatch, moneyOnAccount]
   );
@@ -48,7 +49,7 @@ export const ControlCash = () => {
         type="text"
         value={inputCash}
         placeholder="Введите сумму"
-        onInput={handleChangeInputCash}
+        onInput={handleInputCashChange}
       />
       <button
         className="w-80 h-12 px-10 py-2 bg-violet-400 rounded-3xl text-white mb-4"

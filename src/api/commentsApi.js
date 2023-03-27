@@ -1,7 +1,5 @@
 import instance from "./instance";
 
-const requestComments = (num) => {
-  return instance.get(`/comments?_limit=${num}`);
-};
+const requestComments = (limit) => instance.get(`/comments?_limit=${limit}`);
 
 export default requestComments;
