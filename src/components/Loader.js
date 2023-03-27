@@ -1,10 +1,7 @@
 import { TailSpin } from "react-loader-spinner";
-import { selectLoader } from "../store/loader/selector";
-import { useSelector } from "react-redux";
 
-export const Loader = () => {
-  const loader = useSelector(selectLoader);
-  console.log("spinner >>>", loader);
+export const Loader = ({ isLoading }) => {
+  console.log("spinner >>>", isLoading);
   return (
     <div className="loader-styles">
       <TailSpin
@@ -15,7 +12,7 @@ export const Loader = () => {
         radius="1"
         wrapperStyle={{}}
         wrapperClass=""
-        visible={loader}
+        visible={isLoading}
       />
     </div>
   );

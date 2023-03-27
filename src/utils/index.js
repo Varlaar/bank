@@ -1,1 +1,1 @@
-export {normalizeValue} from './normalizeValue';
+export { normalizeValue } from "./normalizeValue";

@@ -10,7 +10,7 @@ import uniqid from "uniqid";
 export const Comments = () => {
   const [textComment, setTextComment] = useState("");
   const dispatch = useDispatch();
-  const comments = useSelector(selectComments);
+  const { comments, isLoading } = useSelector(selectComments);
 
   const commentsList = comments.map((comment) => (
     <SingleComment key={comment.id} title={comment.title} id={comment.id} />
@@ -27,12 +27,12 @@ export const Comments = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchComments({_limit: 10}));
+    dispatch(fetchComments({ _limit: 10 }));
   }, []);
 
   return (
     <>
-      <Loader />
+      {isLoading && <Loader />}
       <h1 className="text-violet-500 font-bold text-3xl mb-8 mt-8">
         Комментарии
       </h1>
