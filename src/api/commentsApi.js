@@ -1,7 +1,5 @@
 import instance from "./instance";
+import paramsToString from "./utils/paramsToString";
 
-const requestComments = (num) => {
-  return instance.get(`/comments?_limit=${num}`);
-};
-
-export default requestComments;
+export const requestComments = (params = {}) =>
+  instance.get(`/comments?${paramsToString(params)}`);

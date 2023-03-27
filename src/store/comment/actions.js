@@ -1,7 +1,5 @@
 import types from "./types";
-import requestComments from "../../api/commentsApi";
-import { loaderOn } from "../loader/actions";
-import { loaderOff } from "../loader/actions";
+import { requestComments } from "../../api/commentsApi";
 
 export const commentCreate = (title, id) => ({
   type: types.COMMENT_CREATE,
@@ -24,14 +22,13 @@ export const commentDelete = (id) => ({
   payload: id,
 });
 
-export const fetchComments = () => async (dispatch) => {
-  dispatch(loaderOn());
+export const fetchComments = (params) => async (dispatch) => {
   dispatch({
     type: types.FETCH_COMMENTS_REQUEST,
   });
 
   try {
-    const response = await requestComments(10);
+    const response = await requestComments(params);
     setTimeout(() => {
       dispatch({
         type: types.FETCH_COMMENTS_SUCCESS,
@@ -39,12 +36,11 @@ export const fetchComments = () => async (dispatch) => {
           data: response.data,
         },
       });
-      dispatch(loaderOff());
     }, 2000);
   } catch (error) {
     dispatch({
       type: types.FETCH_COMMENTS_FAILURE,
+      error: "Ошибка API",
     });
-    dispatch(loaderOff())
   }
 };

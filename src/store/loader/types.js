@@ -1,4 +1,0 @@
-export default Object.freeze({
-  LOADER_DISPLAY_ON: "LOADER_DISPLAY_ON",
-  LOADER_DISPLAY_OFF: "LOADER_DISPLAY_OFF",
-});

@@ -1,39 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { commentUpdate } from "../store/comment/actions";
-import { commentDelete } from "../store/comment/actions";
+import { commentUpdate, commentDelete } from "../store/comment/actions";
 
-export const SingleComment = ({payload}) => {
-  const [commentText, setCommentText] = useState("");
-  const {title, id} = payload;
+export const SingleComment = ({ title, id }) => {
+  const [commentText, setCommentText] = useState(title);
   const dispatch = useDispatch();
 
-  const handleChangeInputText = ({target: {value}}) => {
-    setCommentText(value)
-  }
+  const handleInputTextChange = ({ target: { value } }) => {
+    setCommentText(value);
+  };
 
-  const handleUpdateTextComment = (e) => {
+  const handleTextCommentUpdate = (e) => {
     e.preventDefault();
-    console.log('submit >>>', commentText)
-    dispatch(commentUpdate(commentText, id))
-  }
+    console.log("submit >>>", commentText);
+    dispatch(commentUpdate({ commentText, id }));
+  };
 
-  const handleDeleteTextComment = (e) => {
+  const handleTextCommentDelete = (e) => {
     e.preventDefault();
-    dispatch(commentDelete(id))
-  }
-
-  useEffect(() => {
-    if(title) {
-      setCommentText(title)
-    }
-  }, [title])
+    dispatch(commentDelete(id));
+  };
 
   return (
-    <form onSubmit={handleUpdateTextComment} className="flex flex-row justify-between items-center">
-    <input className="mt-3" type="text" value={commentText} onChange={handleChangeInputText}></input>
-    <input type="submit" hidden></input>
-    <button className="text-center" onClick={handleDeleteTextComment}>&times;</button>
-  </form>
+    <form
+      onSubmit={handleTextCommentUpdate}
+      className="flex justify-between items-center mt-3"
+    >
+      <input
+        type="text"
+        value={commentText}
+        onChange={handleInputTextChange}
+      ></input>
+      <input type="submit" hidden></input>
+      <button
+        type="submit"
+        className="text-center"
+        onClick={handleTextCommentDelete}
+      >
+        <span className="text-4xl">&times;</span>
+      </button>
+    </form>
   );
 };
