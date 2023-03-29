@@ -28,7 +28,7 @@ export const Comments = () => {
 
   useEffect(() => {
     dispatch(fetchComments({ _limit: 10 }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
