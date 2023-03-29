@@ -29,16 +29,18 @@ export const fetchComments = (params) => async (dispatch) => {
 
   try {
     const response = await requestComments(params);
+    setTimeout(() => {
       dispatch({
         type: types.FETCH_COMMENTS_SUCCESS,
         payload: {
           data: response.data,
         },
       });
+    }, 2000);
   } catch (error) {
     dispatch({
       type: types.FETCH_COMMENTS_FAILURE,
-      error: "Ошибка API",
+      payload: error.message,
     });
   }
 };

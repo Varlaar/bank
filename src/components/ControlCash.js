@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCash, getCash } from "../store/cash/actions";
 import { selectCash } from "../store/cash/selector";
@@ -18,48 +18,50 @@ export const ControlCash = () => {
   };
 
   // Внесение денег на счет
-  const handleAddCash = useCallback(
-    (inputCash) => {
-      dispatch(addCash(inputCash));
-      setInputCash("");
-    },
-    [dispatch]
-  );
+  const handleAddCash = (inputCash) => {
+    dispatch(addCash(inputCash));
+    setInputCash("");
+  };
 
   // Снятие денег со счета
-  const handleGetCash = useCallback(
-    (inputCash) => {
-      if (inputCash > moneyOnAccount) {
-        alert(
-          `На Вашем счету недостаточно средств! Вы можете снять ${moneyOnAccount} руб`
-        );
-        setInputCash(moneyOnAccount);
-        return;
-      }
-      dispatch(getCash(inputCash));
-      setInputCash("");
-    },
-    [dispatch, moneyOnAccount]
-  );
+  const handleGetCash = (inputCash) => {
+    if (inputCash > moneyOnAccount) {
+      alert(
+        `На Вашем счету недостаточно средств! Вы можете снять ${moneyOnAccount} руб`
+      );
+      setInputCash(moneyOnAccount);
+      return;
+    }
+    dispatch(getCash(inputCash));
+    setInputCash("");
+  };
 
   return (
     <div className="flex flex-col">
       <input
-        className="form-input w-80 px-4 py-2 border-purple-400 border rounded-md mb-4"
+        className="form-input mb-4 w-80 rounded-md border border-violet-400 px-4 py-2"
         type="text"
         value={inputCash}
         placeholder="Введите сумму"
         onInput={handleInputCashChange}
       />
       <button
-        className="w-80 h-12 px-10 py-2 bg-violet-400 rounded-3xl text-white mb-4"
+        className={
+          disabledAddCash
+            ? "mb-4 h-12 w-80 rounded-3xl bg-violet-200 px-10 py-2 font-bold text-white"
+            : "mb-4 h-12 w-80 rounded-3xl bg-violet-400 px-10 py-2 font-bold text-white transition duration-300 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-900"
+        }
         onClick={() => handleAddCash(inputCash)}
         disabled={disabledAddCash}
       >
         Пополнить счет
       </button>
       <button
-        className="bg-white w-80 h-12 px-10 py-2 border-purple-400 rounded-3xl border font-bold text-purple-400"
+        className={
+          disabledGetCash
+            ? "h-12 w-80 rounded-3xl bg-white px-10 py-2 font-bold text-purple-300 opacity-70"
+            : "duration-2000 h-12 w-80 rounded-3xl border border-violet-400 bg-white px-10 py-2 font-bold text-violet-400 transition hover:border-none hover:bg-violet-400 hover:text-white"
+        }
         onClick={() => handleGetCash(inputCash)}
         disabled={disabledGetCash}
       >

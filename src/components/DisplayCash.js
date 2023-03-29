@@ -5,7 +5,7 @@ export const DisplayCash = () => {
   const cash = useSelector(selectCash);
 
   return (
-    <h1 className="text-violet-500 font-bold text-3xl mb-8">
+    <h1 className="mb-8 text-3xl font-bold text-violet-500">
       Текущий счет: {cash} руб
     </h1>
   );
