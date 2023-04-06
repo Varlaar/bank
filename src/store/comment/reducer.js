@@ -31,21 +31,18 @@ export const comments = (state = initialState, action) => {
       return { ...state, comments: [...state.comments, action.payload] };
 
     case types.COMMENT_UPDATE:
-      const newCommentsAfterUpdate = comments.reduce((acc, item) => {
-        if (item.id === payload.id) {
-          return [...acc, payload];
-        }
-        return [...acc, item];
-      }, []);
+      const newCommentsAfterUpdate = comments.reduce(
+        (acc, item) =>
+          item.id === payload.id ? [...acc, payload] : [...acc, item],
+        []
+      );
       return { ...state, comments: newCommentsAfterUpdate };
 
     case types.COMMENT_DELETE:
-      const newCommentsAfterDelete = comments.reduce((acc, item) => {
-        if (item.id === payload) {
-          return acc;
-        }
-        return [...acc, item];
-      }, []);
+      const newCommentsAfterDelete = comments.reduce(
+        (acc, item) => (item.id === payload ? acc : [...acc, item]),
+        []
+      );
       return { ...state, comments: newCommentsAfterDelete };
 
     default:

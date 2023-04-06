@@ -4,13 +4,11 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { BrowserRouter } from "react-router-dom";
 
-import styles from "./App.module.scss";
-
 const App = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <div className={styles.wrapper}>
+        <div className="absolute left-2/4 top-2/4 flex -translate-x-2/4 -translate-y-2/4 flex-col items-center">
           <RootNavigation />
         </div>
       </Provider>
