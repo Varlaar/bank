@@ -10,7 +10,7 @@ import uniqid from "uniqid";
 export const Comments = () => {
   const [textComment, setTextComment] = useState("");
   const dispatch = useDispatch();
-  const { comments, isLoading } = useSelector(selectComments);
+  const { comments, isLoading, error } = useSelector(selectComments);
 
   const commentsList = comments.map((comment) => (
     <SingleComment key={comment.id} title={comment.title} id={comment.id} />
@@ -32,8 +32,14 @@ export const Comments = () => {
 
   return (
     <>
+      {error && (
+        <div className="flex flex-col items-center text-center text-base font-bold text-red-700">
+          <h3>Произошла ошибка API</h3>
+          <h3>Пожалуйста, перезагрузите страницу</h3>
+        </div>
+      )}
       {isLoading && <Loader />}
-      <h1 className="text-violet-500 font-bold text-3xl mb-8 mt-8">
+      <h1 className="mb-8 mt-8 text-3xl font-bold text-violet-500">
         Комментарии
       </h1>
       <form onSubmit={handleSubmit}>
@@ -44,7 +50,7 @@ export const Comments = () => {
         ></input>
         <input type="submit" hidden></input>
       </form>
-      {!!comments.length && commentsList}
+      {comments && commentsList}
       <Link className="mt-8" to="/">
         Вернуться назад
       </Link>

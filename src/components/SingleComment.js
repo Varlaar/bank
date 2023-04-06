@@ -24,7 +24,7 @@ export const SingleComment = ({ title, id }) => {
   return (
     <form
       onSubmit={handleTextCommentUpdate}
-      className="flex justify-between items-center mt-3"
+      className="mt-3 flex items-center justify-between"
     >
       <input
         type="text"
