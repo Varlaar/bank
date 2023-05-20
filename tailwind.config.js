@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         bodyСolor: "#f6e5fe",
+        whiteColor: "#ffffff"
       },
       transitionTimingFunction: {
         DEFAULT: "ease-in-out",
