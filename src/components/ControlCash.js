@@ -5,6 +5,7 @@ import { selectCash } from "../store/cash/selector";
 import { normalizeValue } from "../utils";
 import { Button } from "./Button";
 import { Input } from "./Input";
+import classNames from "classnames";
 
 const ControlCash = () => {
   const [inputCash, setInputCash] = useState(""); // Сумма для внесения / снятия денег
@@ -49,19 +50,30 @@ const ControlCash = () => {
       />
       <Button
         title="Пополнить счет"
-        className={
-          disabledAddCash ? "bth mb-4" : "bth mb-4 hover:bg-purple-500"
-        }
+        className={classNames(
+          { "bth mb-4 hover:bg-purple-500": !disabledAddCash },
+          { "bth mb-4": disabledAddCash }
+        )}
+        // className={disabledAddCash ? "bth mb-4" : "bth mb-4 hover:bg-purple-500"}
         onClick={() => handleAddCash(inputCash)}
         disabled={disabledAddCash}
       />
       <Button
         title="Снять деньги со счета"
-        className={
-          disabledGetCash
-            ? "bth text-purple-300 opacity-70 disabled:bg-white"
-            : "bth border border-violet-400 bg-white text-violet-400 hover:border-transparent hover:bg-violet-400 hover:text-white"
-        }
+        className={classNames(
+          {
+            "bth border border-violet-400 bg-white text-violet-400 hover:border-transparent hover:bg-violet-400 hover:text-white":
+              !disabledGetCash,
+          },
+          {
+            "bth text-purple-300 opacity-70 disabled:bg-white": disabledGetCash,
+          }
+        )}
+        // className={
+        //   disabledGetCash
+        //     ? "bth text-purple-300 opacity-70 disabled:bg-white"
+        //     : "bth border border-violet-400 bg-white text-violet-400 hover:border-transparent hover:bg-violet-400 hover:text-white"
+        // }
         onClick={() => handleGetCash(inputCash)}
         disabled={disabledGetCash}
       />

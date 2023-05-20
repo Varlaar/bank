@@ -16,7 +16,7 @@ export const comments = (state = initialState, action) => {
     case types.FETCH_COMMENTS_REQUEST:
       return { ...state, isLoading: true, error: null };
     case types.FETCH_COMMENTS_SUCCESS:
-      const loadComments = normalizeLoadComments(action.payload.data);
+      const loadComments = normalizeLoadComments(payload.data);
       return {
         ...state,
         comments: loadComments,
@@ -25,10 +25,10 @@ export const comments = (state = initialState, action) => {
       };
 
     case types.FETCH_COMMENTS_FAILURE:
-      return { ...state, isLoading: false, error: action.payload };
+      return { ...state, isLoading: false, error: payload };
 
     case types.COMMENT_CREATE:
-      return { ...state, comments: [...state.comments, action.payload] };
+      return { ...state, comments: [...state.comments, payload] };
 
     case types.COMMENT_UPDATE:
       const newCommentsAfterUpdate = comments.reduce(
@@ -39,9 +39,9 @@ export const comments = (state = initialState, action) => {
       return { ...state, comments: newCommentsAfterUpdate };
 
     case types.COMMENT_DELETE:
-      const newCommentsAfterDelete = comments.reduce(
-        (acc, item) => (item.id === payload ? acc : [...acc, item]),
-        []
+      console.log(payload);
+      const newCommentsAfterDelete = comments.filter(
+        (item) => item.id !== payload
       );
       return { ...state, comments: newCommentsAfterDelete };
 

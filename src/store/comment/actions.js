@@ -19,7 +19,7 @@ export const commentUpdate = (title, id) => ({
 
 export const commentDelete = (id) => ({
   type: types.COMMENT_DELETE,
-  payload: id,
+  payload: id
 });
 
 export const fetchComments = (params) => async (dispatch) => {
