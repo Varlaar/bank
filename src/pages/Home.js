@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { DisplayCash } from "../components/DisplayCash";
-import { ControlCash } from "../components/ControlCash";
+import { DisplayCash } from "../components";
+import { ControlCash } from "../components";
 
 export const Home = () => {
   return (

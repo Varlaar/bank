@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCash, getCash } from "../store/cash/actions";
 import { selectCash } from "../store/cash/selector";
 import { normalizeValue } from "../utils";
+import { Button } from "./Button";
+import { Input } from "./Input";
 
-export const ControlCash = () => {
+const ControlCash = () => {
   const [inputCash, setInputCash] = useState(""); // Сумма для внесения / снятия денег
   const dispatch = useDispatch();
   const moneyOnAccount = useSelector(selectCash); // Текущая сумма на счету пользователя
@@ -38,35 +40,33 @@ export const ControlCash = () => {
 
   return (
     <div className="flex flex-col">
-      <input
-        className="form-input mb-4 w-80 rounded-md border border-violet-400 px-4 py-2"
+      <Input
+        className="input mb-4"
         type="text"
         value={inputCash}
         placeholder="Введите сумму"
         onInput={handleInputCashChange}
       />
-      <button
+      <Button
+        title="Пополнить счет"
         className={
-          disabledAddCash
-            ? "mb-4 h-12 w-80 rounded-3xl bg-violet-200 px-10 py-2 font-bold text-white"
-            : "mb-4 h-12 w-80 rounded-3xl bg-violet-400 px-10 py-2 font-bold text-white transition duration-300 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-900"
+          disabledAddCash ? "bth mb-4" : "bth mb-4 hover:bg-purple-500"
         }
         onClick={() => handleAddCash(inputCash)}
         disabled={disabledAddCash}
-      >
-        Пополнить счет
-      </button>
-      <button
+      />
+      <Button
+        title="Снять деньги со счета"
         className={
           disabledGetCash
-            ? "h-12 w-80 rounded-3xl bg-white px-10 py-2 font-bold text-purple-300 opacity-70"
-            : "duration-2000 h-12 w-80 rounded-3xl border border-violet-400 bg-white px-10 py-2 font-bold text-violet-400 transition hover:border-none hover:bg-violet-400 hover:text-white"
+            ? "bth text-purple-300 opacity-70 disabled:bg-white"
+            : "bth border border-violet-400 bg-white text-violet-400 hover:border-transparent hover:bg-violet-400 hover:text-white"
         }
         onClick={() => handleGetCash(inputCash)}
         disabled={disabledGetCash}
-      >
-        Снять деньги со счета
-      </button>
+      />
     </div>
   );
 };
+
+export default ControlCash;

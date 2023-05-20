@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { commentUpdate, commentDelete } from "../store/comment/actions";
+import { Input } from "./Input";
 
 export const SingleComment = ({ title, id }) => {
   const [commentText, setCommentText] = useState(title);
@@ -26,11 +27,12 @@ export const SingleComment = ({ title, id }) => {
       onSubmit={handleTextCommentUpdate}
       className="mt-3 flex items-center justify-between"
     >
-      <input
+      <Input
+        className="input"
         type="text"
         value={commentText}
-        onChange={handleInputTextChange}
-      ></input>
+        onInput={handleInputTextChange}
+      />
       <input type="submit" hidden></input>
       <button
         type="submit"
@@ -42,3 +44,5 @@ export const SingleComment = ({ title, id }) => {
     </form>
   );
 };
+
+export default SingleComment;

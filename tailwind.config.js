@@ -4,7 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bodyColor: "#f6e5fe",
+        bodyСolor: "#f6e5fe",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "ease-in-out",
+      },
+      transitionDuration: {
+        DEFAULT: "400ms",
       },
     },
   },

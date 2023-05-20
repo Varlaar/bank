@@ -3,12 +3,10 @@ const paramsToString = (params = {}) => {
     return "";
   }
   return Object.keys(params)
-    .reduce((acc, key) => {
-      if (params[key]) {
-        return [...acc, `${key}=${params[key]}`];
-      }
-      return acc;
-    }, [])
+    .reduce(
+      (acc, key) => (params[key] ? [...acc, `${key}=${params[key]}`] : acc),
+      []
+    )
     .join("&");
 };
 

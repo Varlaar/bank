@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bodyСolor;
+  }
+
+  h1 {
+    @apply text-3xl font-bold text-violet-500;
+  }
+}
+
+@layer components {
+  .input {
+    @apply form-input w-80 rounded-md border border-violet-400 px-4 py-2;
+
+    &:focus {
+      @apply ring ring-violet-600 border-transparent;
+    }
+  }
+
+  .bth {
+    @apply rounded-3xl block w-full py-3 text-white bg-violet-400 font-bold text-center transition-colors;
+
+    &:focus {
+      @apply ring ring-violet-600 border-transparent;
+    }
+
+    &:disabled {
+      @apply bg-violet-200;
+    }
+  }
+}
